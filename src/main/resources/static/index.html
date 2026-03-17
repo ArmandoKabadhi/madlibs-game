@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mad Libs Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<img id="ghost" src="ghost.png" alt="Ghost">
+<div id="jumpscare"></div>
+
+<audio id="backgroundMusic" loop>
+    <source src="calm.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="buttonSound">
+    <source src="click.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="scarySound">
+    <source src="scary.mp3" type="audio/mpeg">
+</audio>
+
+<audio id="screamSound">
+    <source src="scream.mp3" type="audio/mpeg">
+</audio>
+
+<div class="game-container">
+    <h1>Mad Libs Generator</h1>
+    <p class="subtitle">Create ridiculous stories with random words</p>
+
+    <input id="noun" type="text" placeholder="Enter a noun">
+    <input id="verb" type="text" placeholder="Enter a verb">
+    <input id="adjective" type="text" placeholder="Enter an adjective">
+    <input id="place" type="text" placeholder="Enter a place">
+
+    <div class="buttons">
+        <button onclick="generateStory()">Create Story</button>
+        <button onclick="randomWords()">Random Words</button>
+        <button onclick="resetGame()">Reset</button>
+    </div>
+
+    <h2 id="result">Your funny story will appear here...</h2>
+    <h3>Score: <span id="score">0</span></h3>
+</div>
+
+<script src="script.js?v=7"></script>
+</body>
+</html>
