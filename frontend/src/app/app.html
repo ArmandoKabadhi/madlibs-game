@@ -1,0 +1,97 @@
+<div class="page" [class.scary-page]="scaryMode">
+
+  <div class="game-container"
+       [class.scary-container]="scaryMode"
+       [class.easter-egg-active]="scaryMode">
+
+    <div class="fade-group">
+
+      <h1>Mad Libs<br />Generator</h1>
+      <p class="subtitle">Create ridiculous stories with random words</p>
+
+      <input [(ngModel)]="noun" type="text" placeholder="Enter a noun" name="noun" />
+      <input [(ngModel)]="verb" type="text" placeholder="Enter a verb" name="verb" />
+      <input [(ngModel)]="adjective" type="text" placeholder="Enter an adjective" name="adjective" />
+      <input [(ngModel)]="place" type="text" placeholder="Enter a place" name="place" />
+
+      <div class="buttons">
+        <button
+          class="btn-create"
+          type="button"
+          (click)="generateStory()"
+          [disabled]="isLoading || isTyping || !canGenerateStory()"
+        >
+          {{ isLoading ? 'Generating...' : isTyping ? 'Typing...' : 'Create Story' }}
+        </button>
+
+        <button
+          class="btn-random"
+          type="button"
+          (click)="randomWords()"
+          [disabled]="isLoading || isTyping"
+        >
+          Random Words
+        </button>
+
+        <button
+          class="btn-reset"
+          type="button"
+          (click)="resetGame()"
+        >
+          Reset
+        </button>
+      </div>
+
+      <h3>Score: <span>{{ score }}</span></h3>
+
+    </div>
+
+    <div class="result-box" [class.scary-result-box]="scaryMode">
+      <h2 id="result" [class.scary-result]="scaryMode">
+        {{ result }}
+      </h2>
+    </div>
+
+  </div>
+
+  <!-- WARNING POPUP -->
+  <div class="warning-overlay" *ngIf="showWarningPopup">
+    <div class="warning-box">
+      <h2>⚠ WARNING ⚠</h2>
+      <p>Be careful... some stories should not be told.</p>
+      <button type="button" (click)="closeWarningPopup()">Close</button>
+    </div>
+  </div>
+
+  <!-- JUMPSCARE -->
+  <div class="jumpscare-overlay" *ngIf="showJumpScare"></div>
+
+  <!-- GAME OVER -->
+  <div class="gameover-overlay" *ngIf="showGameOver" (click)="restartFromGameOver()">
+    <div class="gameover-content">
+      <h1 class="gameover-text"
+          [class.glitch]="glitchActive"
+          [attr.data-text]="endingText">
+        {{ endingText }}
+      </h1>
+      <p class="gameover-hint">Click anywhere to restart</p>
+    </div>
+  </div>
+
+  <audio #backgroundMusic loop>
+    <source src="calm.mp3" type="audio/mpeg" />
+  </audio>
+
+  <audio #buttonSound>
+    <source src="click.mp3" type="audio/mpeg" />
+  </audio>
+
+  <audio #scarySound loop>
+    <source src="scary.mp3" type="audio/mpeg" />
+  </audio>
+
+  <audio #screamSound>
+    <source src="scream.mp3" type="audio/mpeg" />
+  </audio>
+
+</div>

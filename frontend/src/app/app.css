@@ -1,0 +1,458 @@
+* {
+  box-sizing: border-box;
+}
+
+:host {
+  display: block;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #f77eb4 0%, #7bc8f6 55%, #d7df8a 100%);
+  padding: 30px 16px;
+}
+
+.game-container {
+  width: 100%;
+  max-width: 540px;
+  background: rgba(245, 245, 245, 0.92);
+  border-radius: 30px;
+  padding: 42px 40px 36px;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+}
+
+h1 {
+  margin: 0 0 22px;
+  font-size: 64px;
+  line-height: 0.95;
+  font-weight: 800;
+  color: #ff4f93;
+}
+
+.subtitle {
+  margin: 0 0 28px;
+  font-size: 18px;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  padding: 16px 16px;
+  margin: 0 0 14px;
+  border: 2px solid #d9d9d9;
+  border-radius: 14px;
+  font-size: 16px;
+  background: #fbfbfb;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus {
+  border-color: #72cdf5;
+  box-shadow: 0 0 0 4px rgba(114, 205, 245, 0.14);
+}
+
+.buttons {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+button {
+  border: none;
+  border-radius: 16px;
+  padding: 14px 22px;
+  min-width: 140px;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.13);
+  transition: transform 0.15s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.btn-create {
+  background: linear-gradient(135deg, #ff4f93, #ff5ea1);
+}
+
+.btn-random {
+  background: linear-gradient(135deg, #6ed0f7, #5bc7f0);
+}
+
+.btn-reset {
+  background: linear-gradient(135deg, #a086ff, #8e7eff);
+  min-width: 110px;
+}
+
+.result-box {
+  margin-top: 32px;
+  min-height: 110px;
+  border: 2px dashed #d8d8d8;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.32);
+  padding: 18px 16px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+}
+
+#result {
+  margin: 0;
+  width: 100%;
+  min-height: 70px;
+  font-size: 20px;
+  line-height: 1.45;
+  color: #222;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+h3 {
+  margin-top: 26px;
+  margin-bottom: 0;
+  font-size: 20px;
+  color: #333;
+}
+
+/* scary mode */
+.scary-page {
+  background: radial-gradient(circle at center, #220000 0%, #000000 70%);
+}
+
+.scary-container {
+  background: rgba(16, 16, 16, 0.95);
+  color: #ff4a4a;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
+}
+
+.scary-container .subtitle,
+.scary-container h3 {
+  color: #ff8b8b;
+}
+
+.scary-container input {
+  background: #1b1b1b;
+  color: #fff;
+  border-color: #4a1d1d;
+}
+
+.scary-container input::placeholder {
+  color: #b8a0a0;
+}
+
+.scary-result-box {
+  border-color: #7a2b2b;
+  background: rgba(255, 0, 0, 0.05);
+}
+
+.scary-result {
+  color: #ff3d3d !important;
+}
+
+/* popup */
+.warning-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.76);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  padding: 20px;
+}
+.fade-group {
+  transition: opacity 0.8s ease, filter 0.8s ease;
+}
+
+.result-box,
+#result,
+h3 {
+  transition: opacity 0.8s ease, background 0.8s ease, border-color 0.8s ease, color 0.8s ease, box-shadow 0.8s ease;
+}
+
+.easter-egg-active {
+  background: rgba(0, 0, 0, 0.96) !important;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.85) !important;
+}
+
+.easter-egg-active .fade-group {
+  opacity: 0;
+  filter: blur(3px);
+  pointer-events: none;
+}
+
+.easter-egg-active .result-box {
+  opacity: 1;
+  background: rgba(20, 0, 0, 0.95);
+  border-color: #8b1e1e;
+  box-shadow: 0 0 24px rgba(255, 0, 0, 0.15);
+}
+
+.easter-egg-active #result {
+  color: #ff3d3d;
+}
+
+.easter-egg-active h3 {
+  color: #aa2d2d;
+}
+
+.warning-box {
+  width: 100%;
+  max-width: 420px;
+  background: #0f0f0f;
+  color: #ff4a4a;
+  border: 2px solid #ff3a3a;
+  border-radius: 18px;
+  padding: 28px 24px;
+  text-align: center;
+  box-shadow: 0 0 28px rgba(255, 0, 0, 0.35);
+}
+
+.warning-box h2 {
+  margin-top: 0;
+  margin-bottom: 14px;
+  color: #ff3a3a;
+}
+
+.warning-box p {
+  margin-bottom: 22px;
+  color: #f2b8b8;
+}
+
+.warning-box button {
+  min-width: 120px;
+  background: linear-gradient(135deg, #ff3a3a, #bb1111);
+}
+
+/* jumpscare */
+.jumpscare-overlay {
+  position: fixed;
+  inset: 0;
+  background-image: url('/jumpscare.jfif');
+  background-size: cover;
+  background-position: center;
+  z-index: 10000;
+  animation: jumpFlash 1.8s ease;
+}
+
+@keyframes jumpFlash {
+  0% {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  8% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.shake-screen {
+  animation: shakeScreen 0.45s;
+}
+
+@keyframes shakeScreen {
+  0% { transform: translate(4px, 4px); }
+  25% { transform: translate(-4px, -4px); }
+  50% { transform: translate(4px, -4px); }
+  75% { transform: translate(-4px, 4px); }
+  100% { transform: translate(0, 0); }
+}
+
+@media (max-width: 640px) {
+  .game-container {
+    padding: 32px 22px 28px;
+    border-radius: 24px;
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .buttons {
+    gap: 12px;
+  }
+
+  button {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .btn-reset {
+    min-width: 0;
+  }
+
+  #result {
+    font-size: 18px;
+  }
+}
+.gameover-overlay {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20000;
+  animation: fadeToBlack 1s ease forwards;
+}
+
+.gameover-text {
+  color: red;
+  font-size: 48px;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0;
+  animation: textFadeIn 2s ease forwards;
+  animation-delay: 0.8s;
+  letter-spacing: 2px;
+}
+
+@keyframes fadeToBlack {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes textFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.gameover-overlay {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 20000;
+  animation: fadeToBlack 0.9s ease forwards;
+  cursor: pointer;
+}
+
+.gameover-content {
+  text-align: center;
+  padding: 20px;
+}
+
+.gameover-text {
+  position: relative;
+  color: #c40000;
+  font-size: 54px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  text-align: center;
+  opacity: 0;
+  animation: textFadeIn 1.6s ease forwards;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 6px rgba(255, 0, 0, 0.35),
+    0 0 20px rgba(255, 0, 0, 0.18);
+}
+
+.gameover-hint {
+  margin-top: 26px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 16px;
+  letter-spacing: 1px;
+  opacity: 0;
+  animation: textFadeIn 1.6s ease forwards;
+  animation-delay: 1.2s;
+}
+
+.gameover-text.glitch {
+  animation:
+    textFadeIn 1.6s ease forwards,
+    glitchSkew 0.15s steps(2, end);
+}
+
+.gameover-text.glitch::before,
+.gameover-text.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.gameover-text.glitch::before {
+  color: #ff2a2a;
+  transform: translate(-3px, 0);
+  text-shadow: 2px 0 #000;
+  opacity: 0.8;
+  clip-path: inset(10% 0 55% 0);
+}
+
+.gameover-text.glitch::after {
+  color: #7a0000;
+  transform: translate(3px, 0);
+  text-shadow: -2px 0 #000;
+  opacity: 0.8;
+  clip-path: inset(55% 0 8% 0);
+}
+
+@keyframes fadeToBlack {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes textFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glitchSkew {
+  0% { transform: translate(0) skew(0deg); }
+  20% { transform: translate(-2px, 1px) skew(2deg); }
+  40% { transform: translate(2px, -1px) skew(-2deg); }
+  60% { transform: translate(-1px, 0) skew(1deg); }
+  80% { transform: translate(1px, 1px) skew(-1deg); }
+  100% { transform: translate(0) skew(0deg); }
+}
