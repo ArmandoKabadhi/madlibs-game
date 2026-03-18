@@ -74,7 +74,7 @@ export class AppComponent {
     this.scaryMode = false;
     this.showWarningPopup = false;
 
-    this.http.post('http://localhost:8080/api/story', data, { responseType: 'text' })
+    this.http.post('/api/story', data, { responseType: 'text' })
       .pipe(
         finalize(() => {
           this.isLoading = false;
